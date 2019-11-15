@@ -13,7 +13,7 @@ echo "Creating temp dir..."
 mkdir temp
 
 cp -r ./$TARGET/node_modules temp/.
-cp -r $TARGET/* temp/.
+cp -r $TARGET/*.js $TARGET/package.json temp/.
 
 
 echo "Zipping ..."
