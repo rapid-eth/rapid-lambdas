@@ -17,5 +17,4 @@ Example Request:
 		"id": "0x511539f3af56f3f4aa25f107466c09f9668f3d98d951f5bffee0618a4c92d0dc"
 	}
 }
-}
 ```
