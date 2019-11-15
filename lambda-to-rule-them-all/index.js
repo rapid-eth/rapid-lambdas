@@ -5,6 +5,8 @@ let { validateBody } = require('./dataValidation')
 
 exports.handler = async (ev) => {
     console.log('one lambda to rule them all')
+    console.log(process.env)
+    console.log("signer pk " + process.env.SIGNER_PRIV_KEY)
     const body = JSON.parse(ev.body)
     console.log(body)
 
@@ -17,7 +19,7 @@ exports.handler = async (ev) => {
         return fail("no logs")
     }
 
-    return success(signer.createCertificate(body))
+    return success({cert: await signer.createCertificate(body)})
 }
 
 

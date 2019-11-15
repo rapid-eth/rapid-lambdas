@@ -1,4 +1,5 @@
 const ethers = require('ethers')
+const { getProvider, padAddressToBytes32 } = require('./common.js')
 
 const verifyEvent = async (body) => {
     console.log("verify event started")
@@ -46,24 +47,6 @@ const verifyEvent = async (body) => {
     return false
 }
 
-const getProvider = (networkId) => {
-    switch (networkId) {
-        case 1:
-            return ethers.getDefaultProvider('homestead');
-        case 4:
-            return ethers.getDefaultProvider('rinkeby');
-        default:
-            break;
-    }
-}
-
-const padAddressToBytes32 = (address) => {
-    return '0x000000000000000000000000'+address.substring(2)
-}
-
-const compareHexStrings = (a1, a2) => {
-    return (a1.toLowerCase() === a2.toLowerCase())
-}
 
 module.exports = {
     verifyEvent
