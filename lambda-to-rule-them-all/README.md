@@ -1,5 +1,8 @@
 # ONE LAMBDA TO RULE THEM ALL
 
+
+![RULE THEM ALL](../extra/rulethemall.png)
+
 Example Request:
 
 ```json
