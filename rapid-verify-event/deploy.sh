@@ -1,6 +1,6 @@
 #!/bin/sh
 
-FUNCTION_NAME=lambda-to-rule-them-all
+FUNCTION_NAME=rapid-verify-event
 
 echo "Creating temp dir..."
 mkdir temp

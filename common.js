@@ -19,9 +19,32 @@ const compareHexStrings = (a1, a2) => {
     return (a1.toLowerCase() === a2.toLowerCase())
 }
 
+const success = (s) => {
+    return {
+        headers: {
+            "Access-Control-Allow-Headers": "Origin, X-Requested-With, Content-Type, Accept",
+            "Access-Control-Allow-Origin": "*"
+        },
+        statusCode: 200,
+        body: JSON.stringify(s) || "ok",
+    }
+}
+
+const fail = (reason, code) => {
+    return {
+        headers: {
+            "Access-Control-Allow-Headers": "Origin, X-Requested-With, Content-Type, Accept",
+            "Access-Control-Allow-Origin": "*"
+        },
+        statusCode: code || 400,
+        body: JSON.stringify({ error: reason }),
+    }
+}
 
 module.exports = {
     getProvider,
     padAddressToBytes32,
-    compareHexStrings
+    compareHexStrings,
+    success,
+    fail
 }

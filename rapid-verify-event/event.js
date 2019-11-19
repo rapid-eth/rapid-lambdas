@@ -28,15 +28,12 @@ const verifyEvent = async (body) => {
 
     console.log(topicArray)
 
-
     let filter = {
         address: contractAddress,
         fromBlock: 0, //TODO?
         toBlock: "latest",
         topics: topicArray
     }
-
-
 
     let logs = await provider.getLogs(filter)
     console.log(logs.length)
