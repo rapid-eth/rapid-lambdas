@@ -1,18 +1,17 @@
-# ONE LAMBDA TO RULE THEM ALL
-
-
-![RULE THEM ALL](../extra/rulethemall.png)
+# Event Lambda
 
 Example Request:
 
 ```json
 {
-	"networkId": 4,
-	"contractAddress": "0x24f6898cbaedf28e15a592ab887ff30ff5124a0c",
-	"userAddress": "0x342fe81f80ad854a3aa3c1dc2937999a49d9a8bd",
-	"event": "CollectionCreated(address,bytes32)",
-	"verificationMethod": "param",
-	"param": 0,
+	"userAddress": "0x5AdB8209b5276A23426994298FE9900644F57924",
+	"config": {
+		"type": "event",
+		"networkId": 1,
+		"contractAddress": "0x89d24A6b4CcB1B6fAA2625fE562bDD9a23260359",
+		"event": "Transfer(address,address,uint256)",
+		"index": 0
+	},
 	"certificate": {
 		"networkId": 4,
 		"type": "erc20",
@@ -21,3 +20,5 @@ Example Request:
 	}
 }
 ```
+
+![RULE THEM ALL](../extra/rulethemall.png)

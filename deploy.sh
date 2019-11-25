@@ -14,7 +14,8 @@ mkdir temp
 
 cp -r $TARGET/node_modules temp/.
 cp $TARGET/*.js $TARGET/package.json temp/.
-cp common.js $TARGET/package.json temp/.
+cp common/* $TARGET/package.json temp/.
+cp -r $TARGET/node_modules temp/.
 
 
 echo "Zipping ..."

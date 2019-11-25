@@ -2,7 +2,8 @@ const addressRegex = /^(0x|0X)[A-Fa-f0-9]{40}$/
 const bytes32Regex = /^(0x|0X)[A-Fa-f0-9]{64}$/
 
 const validateBody = (body) => {
-    const { networkId, contractAddress, userAddress, event, verificationMethod, param, certificate } = body;
+    const { userAddress, certificate, config } = body;
+    const { networkId, contractAddress, event, index } = config;
 
     if (!networkId || isNaN(networkId)) {     //if (!networkId || typeof networkId != Number) {
         return { error: "invalid or missing networkId" }
@@ -30,19 +31,11 @@ const validateBody = (body) => {
             return { error: "invalid certificate address" }
         }
     }
-    switch (verificationMethod) {
-        case "sender":
-            break;
-        case "param":
-            if ((param === undefined) || isNaN(param)) {
-                return { error: "invalid event parameter index (must be integer)" }
-            }
-            break;
-        default:
-            return { error: "invalid verificationMethod" }
-
+    if (isNaN(index)) {     //if (!networkId || typeof networkId != Number) {
+        return { error: "invalid or missing event index number" }
     }
-    return {error: null}
+
+    return { error: null }
 }
 
 module.exports = {
