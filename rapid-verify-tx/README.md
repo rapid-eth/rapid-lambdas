@@ -11,7 +11,8 @@ Example Request:
 	"config": {
 		"networkId": 4,
 		"functionSignature": "0xc4b794aa",
-		"toAddress": "0x4b001411186583fd65b8c0b92a57ff028a459f9f"
+		"toAddress": "0x4b001411186583fd65b8c0b92a57ff028a459f9f",
+		"value": 3,
 	},
 	"certificate": {
 		"networkId": 4,
@@ -21,3 +22,4 @@ Example Request:
 	}
 }
 ```
+ 

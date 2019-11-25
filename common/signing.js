@@ -6,7 +6,6 @@ const { getProvider } = require('./common.js')
 
 const createCertificate = async (body) => {
   console.log(process.env)
-  console.log("signer pk " + process.env.SIGNER_PRIV_KEY)
   const signerWallet = new ethers.Wallet(process.env.SIGNER_PRIV_KEY)
 
     const { userAddress, certificate } = body;
