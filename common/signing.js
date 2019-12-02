@@ -1,8 +1,11 @@
 const ethers = require('ethers')
 const { getProvider } = require('./common.js')
 
-
 // 0x81fb5AFdaC43d45b2f8eDB01F6D99972502B37c0
+const signerAddress = () => {
+  const signerWallet = new ethers.Wallet(process.env.SIGNER_PRIV_KEY)
+  return signerWallet.address
+}
 
 const createCertificate = async (body) => {
   console.log(process.env)
@@ -57,5 +60,6 @@ const erc20CertStub = [
 
 
 module.exports = {
-    createCertificate
+    createCertificate,
+    signerAddress
 }
