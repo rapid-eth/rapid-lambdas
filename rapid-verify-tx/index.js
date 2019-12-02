@@ -13,8 +13,15 @@ exports.handler = async (ev) => {
         return fail(error)
     }
 
-    if (!await verifyTransaction(body)) {
+    let isVerified = await verifyTransaction(body)
+    if (!isVerified) {
         return fail("transaction invalid")
+    }
+
+    const { certificate } = body;
+
+    if (!certificate) {
+        return success({verify: isVerified})
     }
 
     return success({cert: await signer.createCertificate(body)})

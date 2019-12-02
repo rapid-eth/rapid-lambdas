@@ -13,8 +13,14 @@ exports.handler = async (ev) => {
         return fail(error)
     }
 
-    if (!await verifyEvent(body)) {
-        return fail("no logs")
+    let isVerified = await verifyEvent(body)
+    if (!isVerified) {
+        return fail("No event found")
+    }
+    const { certificate } = body;
+
+    if (!certificate) {
+        return success({verify: isVerified})
     }
 
     return success({cert: await signer.createCertificate(body)})

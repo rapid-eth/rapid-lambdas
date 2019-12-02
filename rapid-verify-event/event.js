@@ -17,16 +17,33 @@ const verifyEvent = async (body) => {
     }
     topicArray.push(padAddressToBytes32(userAddress))
 
-    let filter = {
-        address: contractAddress,
-        fromBlock: 0, //TODO?
-        toBlock: "latest",
-        topics: topicArray
-    }
-
-    let logs = await provider.getLogs(filter)
-    if (logs.length) {
-        return true
+    if (Array.isArray(contractAddress)) {
+        for (let i = 0; i < contractAddress.length; i++) {
+            const address = contractAddress[i];
+            let filter = {
+                address,
+                fromBlock: 0, //TODO?
+                toBlock: "latest",
+                topics: topicArray
+            }
+        
+            let logs = await provider.getLogs(filter)
+            if (logs.length) {
+                return true
+            }
+        }
+    } else {
+        let filter = {
+            address: contractAddress,
+            fromBlock: 0, //TODO?
+            toBlock: "latest",
+            topics: topicArray
+        }
+    
+        let logs = await provider.getLogs(filter)
+        if (logs.length) {
+            return true
+        }
     }
 
     return false

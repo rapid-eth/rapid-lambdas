@@ -39,16 +39,33 @@ const verifyTransaction = async (body) => {
             console.log('no data on tx')
             return false
         }
-        if (!compareHexStrings(tx.data.substring(0,10), functionSignature)) {
+        if (!compareHexStrings(tx.data.substring(0, 10), functionSignature)) {
             console.log('function sig did not match')
             return false
         }
     }
 
     if (toAddress) {
-        if (!compareHexStrings(toAddress,tx.to)) {
-            console.log('toAddress did not match tx.to')
-            return false
+        if (Array.isArray(toAddress)) {
+            let toAddressMatch = false
+
+            for (let i = 0; i < toAddress.length; i++) {
+                const a = toAddress[i];
+                if (compareHexStrings(a, tx.to)) {
+                    console.log('toAddress did not match tx.to')
+                    toAddressMatch = true
+                    break
+                }
+            }
+            if (!toAddressMatch) {
+                console.log('no matching toAddress found')
+                return false
+            }   
+        } else {
+            if (!compareHexStrings(toAddress, tx.to)) {
+                console.log('toAddress did not match tx.to')
+                return false
+            }
         }
     }
     return true

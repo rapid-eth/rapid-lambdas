@@ -8,7 +8,18 @@ const validateBody = (body) => {
     if (!networkId || isNaN(networkId)) {     //if (!networkId || typeof networkId != Number) {
         return { error: "invalid or missing networkId" }
     }
-    if (!contractAddress || !addressRegex.test(contractAddress)) {
+    if (!contractAddress) {
+        return { error: "missing config.contractAddress" }
+    } else if (Array.isArray(contractAddress)) {
+        let validFormat = true
+        contractAddress.forEach(address => {
+            validFormat = addressRegex.test(address)
+        });
+        if (!validFormat) {
+            return { error: "invalid contract address format" }
+
+        }
+    } else if (!addressRegex.test(contractAddress)) {
         return { error: "invalid contract address" }
     }
     if (!userAddress || !addressRegex.test(userAddress)) {
@@ -18,19 +29,19 @@ const validateBody = (body) => {
         //TODO check format
         return { error: "invalid event" }
     }
-    if (!certificate) {
-        return { error: "no certificate" }
-    } else {
-        if (certificate.type != "erc20") {
-            return { error: "invalid certificate type" }
-        }
-        if (!certificate.address || !addressRegex.test(certificate.address)) {
-            return { error: "invalid certificate address" }
-        }
-        if (!certificate.id) {
-            return { error: "invalid certificate address" }
-        }
-    }
+    // if (!certificate) {
+    //     return { error: "no certificate" }
+    // } else {
+    //     if (certificate.type != "erc20") {
+    //         return { error: "invalid certificate type" }
+    //     }
+    //     if (!certificate.address || !addressRegex.test(certificate.address)) {
+    //         return { error: "invalid certificate address" }
+    //     }
+    //     if (!certificate.id) {
+    //         return { error: "invalid certificate address" }
+    //     }
+    // }
     if (isNaN(index)) {     //if (!networkId || typeof networkId != Number) {
         return { error: "invalid or missing event index number" }
     }
