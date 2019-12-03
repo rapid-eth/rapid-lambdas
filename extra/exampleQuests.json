@@ -1,0 +1,81 @@
+{
+    "quests": [
+        {
+            "questId": 1,
+            "config": {
+                "type": "event",
+                "networkId": 1,
+                "contractAddress": "0x448a5065aebb8e423f0896e6c5d525c040f59af3",
+                "event": "LogNewCup(address,bytes32)",
+                "index": 0
+            }
+        },
+        {
+            "questId": 2,
+            "config": {
+                "type": "transaction",
+                "networkId": 1,
+                "functionSignature": "0x1249c58b",
+                "value": true,
+                "toAddress": "0x4ddc2d193948926d02f9b1fe9e1daa0718270ed5"
+            }
+        },
+        {
+            "questId": 2,
+            "config": {
+                "type": "transaction",
+                "networkId": 1,
+                "functionSignature": "0xa0712d68",
+                "value": null,
+                "toAddress": [
+                    "0x6c8c6b02e7b2be14d4fa6022dfd6d75921d90e4e",
+                    "0xf5dce57282a584d2746faf1593d3121fcac444dc",
+                    "0x158079ee67fce2f58472a96584a73c7ab9ac95c1",
+                    "0x39aa39c021dfbae8fac545936693ac917d5e7563",
+                    "0xc11b1268c1a384e55c48c2391d8d480264a3a7f4",
+                    "0xb3319f5d18bc0d84dd1b4825dcde5d5f7266d407"
+                ]
+            }
+        },
+        {
+            "questId": 4,
+            "config": {
+                "type": "event",
+                "networkId": 1,
+                "contractAddress": "0x6ebeaf8e8e946f0716e6533a6f2cefc83f60e8ab",
+                "event": "Transfer(address,address,uint256)",
+                "index": 1
+            }
+        },
+        {
+            "questId": 7,
+            "config": {
+                "type": "transaction",
+                "networkId": 1,
+                "functionSignature": "0xed74de9d",
+                "value": null,
+                "toAddress": "0x2aEa4Add166EBf38b63d09a75dE1a7b94Aa24163"
+            }
+        },
+        {
+            "questId": 13,
+            "config": {
+                "type": "event",
+                "networkId": 1,
+                "contractAddress": "0xB22c1C159d12461EA124b0deb4b5b93020E6Ad16",
+                "event": "NameRegistered(string,bytes32,address,uint256,uint256)",
+                "index": 1
+            }
+        },
+        {
+            "questId": 99,
+            "config": {
+                "type": "transaction",
+                "networkId": 1,
+                "functionSignature": "0x1896f70a",
+                "value": null,
+                "toAddress": "0x314159265dd8dbb310642f98f50c066173c1259b"
+            }
+        }
+    ]
+}
