@@ -8,16 +8,16 @@ const signerAddress = () => {
 }
 
 const createCertificate = async (body) => {
-
   const { userAddress, certificate } = body;
   const { type } = certificate;
-  if (type === "erc20") {
+  if (type.toLowerCase() === "erc20") {
     return await erc20CertificateSign(userAddress, certificate)
+  } else if (type.toLowerCase() === "collectible") {
+    return await collectibleCertificateSign(userAddress, certificate)
   } else {
-    return {error: "unsupported certificate type"}
+    return { error: "unsupported certificate type" }
   }
 }
-
 
 const erc20CertificateSign = async (userAddress, certificate) => {
   const signerWallet = new ethers.Wallet(process.env.SIGNER_PRIV_KEY)
@@ -38,8 +38,29 @@ const erc20CertificateSign = async (userAddress, certificate) => {
   }
 }
 
-const erc20CertStub = [
-  {
+const collectibleCertificateSign = async (userAddress, certificate) => {
+  const signerWallet = new ethers.Wallet(process.env.SIGNER_PRIV_KEY)
+  let { networkId, type, nonce, address, id } = certificate;
+  const provider = getProvider(networkId)
+
+  const collectibleContract = new ethers.Contract(address, collectibleStub, provider)
+  if (isNaN(nonce)) {
+    console.log("Non-existant or Non-numeric nonce - defaulting to 0")
+    nonce = 0;
+  }
+  try {
+    let hashToSign = await collectibleContract.createCollectibleTypeCertificateHash(id, userAddress, nonce)
+    const messageHashBytes = ethers.utils.arrayify(hashToSign);
+    let signed = await signerWallet.signMessage(messageHashBytes);
+    return signed
+  } catch (err) {
+    if (err.code === "CALL_EXCEPTION") {
+      return { error: "collectible contract does not implement certificates" }
+    }
+  }
+}
+
+const erc20CertStub = [{
     "constant": true,
     "inputs": [
       {
@@ -62,11 +83,39 @@ const erc20CertStub = [
     "stateMutability": "view",
     "type": "function",
     "signature": "0xd7174f22"
-  },
-]
+  }]
 
+const collectibleStub = [{
+  "constant": true,
+  "inputs": [
+    {
+      "name": "_collectibleTypeID",
+      "type": "bytes32"
+    },
+    {
+      "name": "_to",
+      "type": "address"
+    },
+    {
+      "name": "_nonce",
+      "type": "uint256"
+    }
+  ],
+  "name": "createCollectibleTypeCertificateHash",
+  "outputs": [
+    {
+      "name": "",
+      "type": "bytes32"
+    }
+  ],
+  "payable": false,
+  "stateMutability": "view",
+  "type": "function",
+  "signature": "0x6730a24b"
+}]
 
 module.exports = {
   createCertificate,
+
   signerAddress
 }
