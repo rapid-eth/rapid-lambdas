@@ -2,8 +2,6 @@ const ethers = require('ethers')
 const { getProvider, padAddressToBytes32 } = require('./common.js')
 
 const verifyEvent = async (body) => {
-    console.log("verify event started")
-
     const { userAddress, config } = body;
     const { networkId, contractAddress, event, index } = config;
 

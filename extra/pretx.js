@@ -45,7 +45,7 @@ const main = async (address) => {
         }
     })
 
-    console.log(relevantToAddresses)
+    //console.log(relevantToAddresses)
 
     //get relevant questIDs from relevant addresses
     txQuests = txQuests.filter(q => {
@@ -57,9 +57,9 @@ const main = async (address) => {
         }
     })
 
-    console.log(txQuests)
+    //console.log(txQuests)
 
-    console.log(txHistory)
+    //console.log(txHistory)
 
     let validQuests = []
 

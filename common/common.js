@@ -16,6 +16,8 @@ const padAddressToBytes32 = (address) => {
 }
 
 const compareHexStrings = (a1, a2) => {
+    console.log("Compare a1", a1)
+    console.log("Compare a2", a2)
     return (a1.toLowerCase() === a2.toLowerCase())
 }
 
