@@ -8,58 +8,65 @@ const signerAddress = () => {
 }
 
 const createCertificate = async (body) => {
-  console.log(process.env)
+
+  const { userAddress, certificate } = body;
+  const { type } = certificate;
+  if (type === "erc20") {
+    return await erc20CertificateSign(userAddress, certificate)
+  } else {
+    return {error: "unsupported certificate type"}
+  }
+}
+
+
+const erc20CertificateSign = async (userAddress, certificate) => {
   const signerWallet = new ethers.Wallet(process.env.SIGNER_PRIV_KEY)
+  const { networkId, type, address, id } = certificate;
+  const provider = getProvider(networkId)
 
-    const { userAddress, certificate } = body;
-    const { networkId, type, address, id } = certificate;
-    const provider = getProvider(networkId)
-    
-    const certContract = new ethers.Contract(address,erc20CertStub,provider)
-    try {
-      let hashToSign = await certContract.getCertificateHash(id, userAddress)
-      const messageHashBytes = ethers.utils.arrayify(hashToSign);
-      let signed = await signerWallet.signMessage(messageHashBytes);
-  
-      return signed
-    } catch (err) {
-      if (err.code==="CALL_EXCEPTION") {
-        return {error: "reward token contract does not implement certificates"}
-      }
+  const certContract = new ethers.Contract(address, erc20CertStub, provider)
+
+  try {
+    let hashToSign = await certContract.getCertificateHash(id, userAddress)
+    const messageHashBytes = ethers.utils.arrayify(hashToSign);
+    let signed = await signerWallet.signMessage(messageHashBytes);
+    return signed
+  } catch (err) {
+    if (err.code === "CALL_EXCEPTION") {
+      return { error: "reward token contract does not implement certificates" }
     }
-
-
+  }
 }
 
 const erc20CertStub = [
-    {
-        "constant": true,
-        "inputs": [
-          {
-            "name": "_certificateID",
-            "type": "bytes32"
-          },
-          {
-            "name": "_redeemer",
-            "type": "address"
-          }
-        ],
-        "name": "getCertificateHash",
-        "outputs": [
-          {
-            "name": "",
-            "type": "bytes32"
-          }
-        ],
-        "payable": false,
-        "stateMutability": "view",
-        "type": "function",
-        "signature": "0xd7174f22"
+  {
+    "constant": true,
+    "inputs": [
+      {
+        "name": "_certificateID",
+        "type": "bytes32"
       },
+      {
+        "name": "_redeemer",
+        "type": "address"
+      }
+    ],
+    "name": "getCertificateHash",
+    "outputs": [
+      {
+        "name": "",
+        "type": "bytes32"
+      }
+    ],
+    "payable": false,
+    "stateMutability": "view",
+    "type": "function",
+    "signature": "0xd7174f22"
+  },
 ]
 
 
 module.exports = {
-    createCertificate,
-    signerAddress
+  createCertificate,
+  signerAddress
 }

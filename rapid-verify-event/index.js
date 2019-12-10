@@ -1,4 +1,4 @@
-let { verifyEvent } = require('./event')
+let { verifyEvent } = require('./verifyEvent')
 let signer = require('./signing')
 let { validateBody } = require('./dataValidation')
 let { success, fail } = require('./common')

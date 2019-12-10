@@ -2,7 +2,7 @@
 
 FUNCTION_NAME=$1
 
-TARGET=$FUNCTION_NAME
+export TARGET=$FUNCTION_NAME
 
 if [ ! -d "$TARGET" ]; then
   echo "$TARGET does not exist, exiting..."
@@ -12,9 +12,15 @@ fi
 echo "Creating temp dir..."
 mkdir temp
 
+# Run project specific "predeploy.sh"
+PREDEPLOY_FILE=$TARGET/predeploy.sh
+if [ -f "$PREDEPLOY_FILE" ]; then
+    echo "$PREDEPLOY_FILE exist"
+    $PREDEPLOY_FILE
+fi
+
 cp -r $TARGET/node_modules temp/.
 cp $TARGET/*.js $TARGET/package.json temp/.
-cp common/* $TARGET/package.json temp/.
 cp -r $TARGET/node_modules temp/.
 
 
