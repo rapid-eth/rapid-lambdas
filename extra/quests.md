@@ -43,7 +43,7 @@ Contract Address: 0xf87e31492faf9a91b02ee0deaad50d51d56d5d4d (LAND erc721)
 "config": {
     "type": "event",
     "networkId": 1,
-    "contractAddress": "0x6ebeaf8e8e946f0716e6533a6f2cefc83f60e8ab",
+    "contractAddress": "0x0E3A2A1f2146d86A604adc220b4967A898D7Fe07",
     "event": "Transfer(address,address,uint256)",
     "index": 1
 }

@@ -1,4 +1,5 @@
-let { verifyTransaction } = require('./verifyTx')
+let { verifyTransaction } = require('quest-prequalifier')
+
 let signer = require('./signing')
 let { validateBody } = require('./dataValidation')
 let { success, fail } = require('./common')

@@ -1,4 +1,4 @@
-let { verifyEvent } = require('./verifyEvent')
+let { verifyEvent } = require('quest-prequalifier')
 let signer = require('./signing')
 let { validateBody } = require('./dataValidation')
 let { success, fail } = require('./common')
