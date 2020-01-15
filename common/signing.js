@@ -60,6 +60,18 @@ const collectibleCertificateSign = async (userAddress, certificate) => {
   }
 }
 
+const sendFaucetTx = async (userAddress, amount) => {
+  const provider = getProvider(4) //rinkeby only
+  const faucetWallet = new ethers.Wallet(process.env.FAUCET_PRIV_KEY, provider)
+  let bnAmount = ethers.utils.parseEther(amount)
+  let tx = {
+    to: userAddress,
+    value: bnAmount,
+  }
+  let sentTx = await faucetWallet.sendTransaction(tx)
+  console.log(sentTx)
+}
+
 const erc20CertStub = [{
     "constant": true,
     "inputs": [
@@ -117,5 +129,6 @@ const collectibleStub = [{
 module.exports = {
   createCertificate,
 
-  signerAddress
+  signerAddress,
+  sendFaucetTx
 }
