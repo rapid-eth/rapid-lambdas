@@ -1,3 +1,5 @@
 local/
 package*
 node_modules/
+
+secret.env

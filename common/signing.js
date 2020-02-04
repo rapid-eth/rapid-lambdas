@@ -7,6 +7,9 @@ const signerAddress = () => {
   return signerWallet.address
 }
 
+const signerWallet = new ethers.Wallet(process.env.SIGNER_PRIV_KEY)
+
+
 const createCertificate = async (body) => {
   const { userAddress, certificate } = body;
   const { type } = certificate;
@@ -128,7 +131,7 @@ const collectibleStub = [{
 
 module.exports = {
   createCertificate,
-
+  signerWallet,
   signerAddress,
   sendFaucetTx
 }

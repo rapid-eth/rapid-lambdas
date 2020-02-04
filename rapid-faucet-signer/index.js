@@ -11,7 +11,6 @@ exports.handler = async (ev) => {
 
         const { userAddress } = body;
 
-
         // check if they have rinkeby eth - if not send them a small amount
         let provider = getProvider(4)
         let balance = await provider.getBalance(userAddress)

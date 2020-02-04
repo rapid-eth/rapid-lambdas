@@ -20,8 +20,7 @@ if [ -f "$PREDEPLOY_FILE" ]; then
 fi
 
 cp -r $TARGET/node_modules temp/.
-cp $TARGET/*.js $TARGET/package.json temp/.
-cp -r $TARGET/node_modules temp/.
+cp $TARGET/*.js $TARGET/*.json temp/.
 
 
 echo "Zipping ..."
